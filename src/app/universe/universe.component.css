@@ -1,0 +1,5 @@
+.planet-wrapper {
+  display: flex;
+  align-items: center;
+  height: 260px;
+}

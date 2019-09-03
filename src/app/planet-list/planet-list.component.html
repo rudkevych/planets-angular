@@ -1,0 +1,8 @@
+<div class="btn-group-vertical">
+  <button
+    *ngFor="let planetName of planetNames"
+    (click)="loadPlanet(planetName)"
+    type="button"
+    class="btn btn-success"
+  >{{planetName}}</button>
+</div>

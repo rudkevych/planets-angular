@@ -1,0 +1,10 @@
+body {
+  width: 75vw;
+  margin: 5% auto;
+  /*margin-top: 5%;*/
+}
+
+img {
+  border: 1px solid white;
+  border-radius: 5px;
+}

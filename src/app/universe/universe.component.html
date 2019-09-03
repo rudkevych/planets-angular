@@ -1,0 +1,10 @@
+<div class="planet-wrapper">
+  <app-planet-list></app-planet-list>
+  <app-planet
+    (planetStatusEmitter)="isPlanetExist($event)"
+  ></app-planet>
+  <app-greeting *ngIf="!planetExist"></app-greeting>
+</div>
+
+<app-inhabitants></app-inhabitants>
+<hr>

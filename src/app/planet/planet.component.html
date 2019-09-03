@@ -1,0 +1,11 @@
+<div *ngIf="planet" class="planet">
+  <div class="planet_image">
+    <img src="{{planet.imageLink}}" alt="planet">
+  </div>
+  <div class="planet_info">
+    <p><span class="font-weight-bold text-uppercase">Name: </span>{{planet.name}}</p>
+    <p><span class="font-weight-bold text-uppercase">Population: </span> {{planet.population}}</p>
+    <p><span class="font-weight-bold text-uppercase">Climate: </span> {{planet.climate}}</p>
+    <p><span class="font-weight-bold text-uppercase">Diameter:</span> {{planet.diameter}}</p>
+  </div>
+</div>

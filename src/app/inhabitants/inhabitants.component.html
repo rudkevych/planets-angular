@@ -1,0 +1,10 @@
+<div>
+  <h2 *ngIf="inhabitants"
+      class="text-center text-primary"
+  >Inhabitants of planet</h2>
+  <app-inhabitant
+    *ngFor="let inhabitant of inhabitants"
+    [inhabitantItem]="inhabitant"
+  ></app-inhabitant>
+</div>
+
