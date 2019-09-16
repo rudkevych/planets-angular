@@ -8,7 +8,7 @@ export class Converter {
       .setName(planetObj.name)
       .setPopulation(planetObj.population)
       .setDiameter(planetObj.diameter)
-      .setClimate(planetObj.climate)
+      .setClimate(planetObj.climate);
   }
 
   static fromJsonToInhabitant(inhabitantJson) {
@@ -18,6 +18,6 @@ export class Converter {
       .setLanguage(inhabitantObj.language)
       .setClassification(inhabitantObj.classification)
       .setAverageHeight(inhabitantObj.average_height)
-      .setAverageLifespan(inhabitantObj.average_lifespan)
+      .setAverageLifespan(inhabitantObj.average_lifespan);
   }
 }

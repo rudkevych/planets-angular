@@ -7,7 +7,7 @@ import {Inhabitant} from '../domain/inhabitant';
   templateUrl: './inhabitants.component.html',
   styleUrls: ['./inhabitants.component.css']
 })
-export class InhabitantsComponent{
+export class InhabitantsComponent {
   private inhabitants: Array<Inhabitant>;
 
   constructor(private universeService: UniverseService) {

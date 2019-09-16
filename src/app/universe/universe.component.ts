@@ -6,7 +6,7 @@ import {Component} from '@angular/core';
   styleUrls: ['./universe.component.css']
 })
 export class UniverseComponent {
-  planetExist:boolean = false;
+  planetExist = false;
 
   isPlanetExist($event) {
     this.planetExist = $event;

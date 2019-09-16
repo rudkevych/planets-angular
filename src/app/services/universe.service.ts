@@ -1,8 +1,13 @@
 import {Observable, Subject} from 'rxjs';
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {map} from 'rxjs/operators';
+
 import {Planet} from '../domain/planet';
 import {Inhabitant} from '../domain/inhabitant';
 import {Converter} from '../converter/converter';
 
+@Injectable()
 export class UniverseService {
   observablePlanet$: Observable<Planet>;
   private planetSubject: Subject<Planet>;
@@ -10,7 +15,7 @@ export class UniverseService {
   observableInhabitants$: Observable<Array<Inhabitant>>;
   private inhabitantsSubject: Subject<Array<Inhabitant>>;
 
-  constructor() {
+  constructor(private httpClient: HttpClient) {
     this.planetSubject = new Subject<Planet>();
     this.observablePlanet$ = this.planetSubject.asObservable();
 
@@ -18,47 +23,47 @@ export class UniverseService {
     this.observableInhabitants$ = this.inhabitantsSubject.asObservable();
   }
 
-  loadPlanetInfo = async (planetName: string) => {
-    console.log('start loadPlanetInfo');
+  loadPlanetInfo(planetName: string) {
+    this.getPlanetData(planetName).subscribe((planet: Planet) => {
+      this.planetSubject.next(planet);
+    });
+
+    this.getInhabitantsData(planetName);
+  }
+
+  getPlanetData(planetName): Observable<Planet> {
     const planetId = Planet.getPlanetData().get(planetName).get('planetId');
     const planetImage = `https://starwars-visualguide.com/assets/img/planets/${planetId}.jpg`;
+    const apiBase = `https://swapi.co/api/planets/?search=${planetName}`;
 
-    const planetJson = await this.getUniverseData('planets', planetName);
-    const planet = Converter.fromJsonToPlanet(planetJson)
-      .setImageLink(planetImage)
-      .build();
+    return this.httpClient.get(apiBase)
+      .pipe(map(response => {
+        return Converter.fromJsonToPlanet(response)
+          .setImageLink(planetImage)
+          .build();
+      }));
+  }
 
-    const inhabitantsNames = <Array<string>>Planet.getPlanetData().get(planetName).get('planetInhabitants');
-    const inhabitants = await this.loadInhabitantsInfo(inhabitantsNames);
-
-    this.planetSubject.next(planet);
-    this.inhabitantsSubject.next(inhabitants);
-    console.log('end loadPlanetInfo');
-  };
-
-  loadInhabitantsInfo = async (inhabitantsNames) => {
+  getInhabitantsData(planetName) {
+    const inhabitantsNames = Planet.getPlanetData().get(planetName).get('planetInhabitants') as Array<string>;
     const inhabitants = new Array<Inhabitant>();
-    for (let inhabitantName of inhabitantsNames) {
+
+    for (const inhabitantName of inhabitantsNames) {
+      const apiBase = `https://swapi.co/api/species/?search=${inhabitantName}`;
       const inhabitantId = Inhabitant.getInhabitantsImages().get(inhabitantName);
-      const base = `https://starwars-visualguide.com/assets/img/species/${inhabitantId}.jpg`;
-      let inhabitantJson = await this.getUniverseData('species', inhabitantName);
-      let inhabitant = Converter.fromJsonToInhabitant(inhabitantJson)
-        .setImageLink(base)
-        .build();
-      inhabitants.push(inhabitant);
+      const inhabitantImage = `https://starwars-visualguide.com/assets/img/species/${inhabitantId}.jpg`;
+
+      const inhabitantObservable = this.httpClient.get(apiBase).pipe(map(response => {
+        return Converter.fromJsonToInhabitant(response)
+          .setImageLink(inhabitantImage)
+          .build();
+      }));
+
+      inhabitantObservable.subscribe((inhabitant: Inhabitant) => {
+        inhabitants.push(inhabitant);
+      });
+
+      this.inhabitantsSubject.next(inhabitants);
     }
-    return inhabitants;
-  };
-
-  getUniverseData = async (category, name) => {
-    let _apiBase = `https://swapi.co/api/${category}/?search=${name}`;
-    const res = await fetch(_apiBase);
-
-    if (!res.ok) {
-      throw new Error(`Could not fetch ${_apiBase}` +
-        `, received ${res.status}`);
-    }
-    return await res.json();
-  };
-
+  }
 }

@@ -9,6 +9,7 @@ import {InhabitantsComponent} from './inhabitants/inhabitants.component';
 import {InhabitantComponent} from './inhabitant/inhabitant.component';
 import {UniverseService} from './services/universe.service';
 import { GreetingComponent } from './greeting/greeting.component';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { GreetingComponent } from './greeting/greeting.component';
     GreetingComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    HttpClientModule
   ],
   providers: [UniverseService],
   bootstrap: [AppComponent]

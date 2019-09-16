@@ -1,11 +1,4 @@
 export class Inhabitant {
-  private readonly _name: string;
-  private readonly _language: string;
-  private readonly _classification: string;
-  private readonly _averageHeight: number;
-  private readonly _averageLifespan: number;
-  private readonly _imageLink: string;
-
   static inhabitantsImagesId = new Map([
     ['Wookie', 3],
     ['Hutt', 5],
@@ -18,37 +11,45 @@ export class Inhabitant {
     ['Yoda\'s species', 6]
   ]);
 
+  private readonly inhName: string;
+  private readonly inhLanguage: string;
+  private readonly inhClassification: string;
+  private readonly inhAverageHeight: number;
+  private readonly inhAverageLifespan: number;
+
+  private readonly inhImageLink: string;
+
   constructor(inhabitantBuilder: InhabitantBuilder) {
-    this._name = inhabitantBuilder.name;
-    this._language = inhabitantBuilder.language;
-    this._classification = inhabitantBuilder.classification;
-    this._averageHeight = inhabitantBuilder.averageHeight;
-    this._averageLifespan = inhabitantBuilder.averageLifespan;
-    this._imageLink = inhabitantBuilder.imageLink;
+    this.inhName = inhabitantBuilder.name;
+    this.inhLanguage = inhabitantBuilder.language;
+    this.inhClassification = inhabitantBuilder.classification;
+    this.inhAverageHeight = inhabitantBuilder.averageHeight;
+    this.inhAverageLifespan = inhabitantBuilder.averageLifespan;
+    this.inhImageLink = inhabitantBuilder.imageLink;
   }
 
   get name(): string {
-    return this._name;
+    return this.inhName;
   }
 
   get language(): string {
-    return this._language;
+    return this.inhLanguage;
   }
 
   get classification(): string {
-    return this._classification;
+    return this.inhClassification;
   }
 
   get averageHeight(): number {
-    return this._averageHeight;
+    return this.inhAverageHeight;
   }
 
   get averageLifespan(): number {
-    return this._averageLifespan;
+    return this.inhAverageLifespan;
   }
 
   get imageLink(): string {
-    return this._imageLink;
+    return this.inhImageLink;
   }
 
   static getInhabitantsImages() {
@@ -57,68 +58,68 @@ export class Inhabitant {
 }
 
 export class InhabitantBuilder {
-  private _name: string;
-  private _language: string;
-  private _classification: string;
-  private _averageHeight: number;
-  private _averageLifespan: number;
-  private _imageLink: string;
+  private inhabitantBuilderName: string;
+  private inhabitantBuilderLanguage: string;
+  private inhabitantBuilderClassification: string;
+  private inhabitantBuilderAverageHeight: number;
+  private inhabitantBuilderAverageLifespan: number;
+  private inhabitantBuilderImageLink: string;
 
   constructor() {
   }
 
   setName(value: string) {
-    this._name = value;
+    this.inhabitantBuilderName = value;
     return this;
   }
 
   setLanguage(value: string) {
-    this._language = value;
+    this.inhabitantBuilderLanguage = value;
     return this;
   }
 
   setClassification(value: string) {
-    this._classification = value;
+    this.inhabitantBuilderClassification = value;
     return this;
   }
 
   setAverageHeight(value: number) {
-    this._averageHeight = value;
+    this.inhabitantBuilderAverageHeight = value;
     return this;
   }
 
   setAverageLifespan(value: number) {
-    this._averageLifespan = value;
+    this.inhabitantBuilderAverageLifespan = value;
     return this;
   }
 
   setImageLink(value: string) {
-    this._imageLink = value;
+    this.inhabitantBuilderImageLink = value;
     return this;
   }
 
   get name(): string {
-    return this._name;
+    return this.inhabitantBuilderName;
   }
 
   get language(): string {
-    return this._language;
+    return this.inhabitantBuilderLanguage;
   }
 
   get classification(): string {
-    return this._classification;
+    return this.inhabitantBuilderClassification;
   }
 
   get averageHeight(): number {
-    return this._averageHeight;
+    return this.inhabitantBuilderAverageHeight;
   }
 
   get averageLifespan(): number {
-    return this._averageLifespan;
+    return this.inhabitantBuilderAverageLifespan;
   }
 
   get imageLink(): string {
-    return this._imageLink;
+    return this.inhabitantBuilderImageLink;
   }
 
   build() {

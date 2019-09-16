@@ -10,12 +10,12 @@ import {Planet} from '../domain/planet';
 export class PlanetComponent {
   private planet: Planet;
 
-  @Output() planetStatusEmitter= new EventEmitter<boolean>();
+  @Output() planetStatusEmitter = new EventEmitter<boolean>();
 
   constructor(private universeService: UniverseService) {
     universeService.observablePlanet$.subscribe((newPlanet: Planet) => {
       this.planet = newPlanet;
-      this.planetStatusEmitter.emit(true)
+      this.planetStatusEmitter.emit(true);
     });
   }
 }

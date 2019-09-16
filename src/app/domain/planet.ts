@@ -1,10 +1,4 @@
 export class Planet {
-  private readonly _name: string;
-  private readonly _population: number;
-  private readonly _climate: string;
-  private readonly _diameter: number;
-  private readonly _imageLink: string;
-
   static planetData = new Map([
     ['Naboo', new Map<string, Array<string>|number>([
       ['planetInhabitants', ['Wookie', 'Hutt', 'Trandoshan']],
@@ -20,32 +14,39 @@ export class Planet {
     ])]
   ]);
 
+  private readonly planetName: string;
+  private readonly planetPopulation: number;
+  private readonly planetClimate: string;
+  private readonly planetDiameter: number;
+
+  private readonly planetImageLink: string;
+
   constructor(planetBuilder: PlanetBuilder) {
-    this._name = planetBuilder.name;
-    this._population = planetBuilder.population;
-    this._climate = planetBuilder.climate;
-    this._diameter = planetBuilder.diameter;
-    this._imageLink = planetBuilder.imageLink;
+    this.planetName = planetBuilder.name;
+    this.planetPopulation = planetBuilder.population;
+    this.planetClimate = planetBuilder.climate;
+    this.planetDiameter = planetBuilder.diameter;
+    this.planetImageLink = planetBuilder.imageLink;
   }
 
   get name(): string {
-    return this._name;
+    return this.planetName;
   }
 
   get population(): number {
-    return this._population;
+    return this.planetPopulation;
   }
 
   get climate(): string {
-    return this._climate;
+    return this.planetClimate;
   }
 
   get diameter(): number {
-    return this._diameter;
+    return this.planetDiameter;
   }
 
   get imageLink(): string {
-    return this._imageLink;
+    return this.planetImageLink;
   }
 
   static getPlanetData() {
@@ -54,58 +55,58 @@ export class Planet {
 }
 
 export class PlanetBuilder {
-  private _name: string;
-  private _population: number;
-  private _climate: string;
-  private _diameter: number;
-  private _imageLink: string;
+  private planetBuilderName: string;
+  private planetBuilderPopulation: number;
+  private planetBuilderClimate: string;
+  private planetBuilderDiameter: number;
+  private planetBuilderImageLink: string;
 
   constructor() {
   }
 
   setName(value: string) {
-    this._name = value;
+    this.planetBuilderName = value;
     return this;
   }
 
   setPopulation(value: number) {
-    this._population = value;
+    this.planetBuilderPopulation = value;
     return this;
   }
 
   setClimate(value: string) {
-    this._climate = value;
+    this.planetBuilderClimate = value;
     return this;
   }
 
   setDiameter(value: number) {
-    this._diameter = value;
+    this.planetBuilderDiameter = value;
     return this;
   }
 
   setImageLink(value: string) {
-    this._imageLink = value;
+    this.planetBuilderImageLink = value;
     return this;
   }
 
   get name(): string {
-    return this._name;
+    return this.planetBuilderName;
   }
 
   get population(): number {
-    return this._population;
+    return this.planetBuilderPopulation;
   }
 
   get climate(): string {
-    return this._climate;
+    return this.planetBuilderClimate;
   }
 
   get diameter(): number {
-    return this._diameter;
+    return this.planetBuilderDiameter;
   }
 
   get imageLink(): string {
-    return this._imageLink;
+    return this.planetBuilderImageLink;
   }
 
   build() {
